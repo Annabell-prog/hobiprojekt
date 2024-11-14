@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Nov 14, 2024 kell 02:13 PL
+-- Loomise aeg: Nov 14, 2024 kell 03:00 PL
 -- Serveri versioon: 10.4.32-MariaDB
 -- PHP versioon: 8.2.12
 
@@ -73,7 +73,6 @@ CREATE TABLE `pieces` (
 --
 
 CREATE TABLE `piece_tags` (
-  `id` int(10) UNSIGNED NOT NULL,
   `piece_id` int(10) UNSIGNED NOT NULL,
   `tag_id` int(10) UNSIGNED NOT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
@@ -115,10 +114,8 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `user_collections` (
-  `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `collection_id` int(10) UNSIGNED NOT NULL,
-  `role` enum('owner','editor','viewer') NOT NULL DEFAULT 'viewer',
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -151,8 +148,7 @@ ALTER TABLE `pieces`
 -- Indeksid tabelile `piece_tags`
 --
 ALTER TABLE `piece_tags`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `piece_id` (`piece_id`),
+  ADD PRIMARY KEY (`piece_id`,`tag_id`),
   ADD KEY `tag_id` (`tag_id`);
 
 --
@@ -172,8 +168,7 @@ ALTER TABLE `users`
 -- Indeksid tabelile `user_collections`
 --
 ALTER TABLE `user_collections`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
+  ADD PRIMARY KEY (`user_id`,`collection_id`),
   ADD KEY `collection_id` (`collection_id`);
 
 --
@@ -199,12 +194,6 @@ ALTER TABLE `pieces`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT tabelile `piece_tags`
---
-ALTER TABLE `piece_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT tabelile `tags`
 --
 ALTER TABLE `tags`
@@ -214,12 +203,6 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT tabelile `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT tabelile `user_collections`
---
-ALTER TABLE `user_collections`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
