@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LYZELL's POTTERY</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px 0;
+        }
+
+        .image-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #e0e0e0;
+            display: inline-block;
+            margin: 0 20px;
+        }
+
+
+        .about-section {
+            width: 300px;
+            height: 200px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            text-align: left;
+        }
+
+        .about-section h2 {
+            font-size: 24px;
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
+
+    <div class="content">
+        <div class="image-placeholder"></div>
+
+        <div class="about-section">
+            <h2>About me</h2>
+            <p>Welcome to LYZELL's POTTERY! Here you can find information about my passion for pottery and the beautiful works I create. Stay tuned for more updates!</p>
+        </div>
+
+        <div class="image-placeholder"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "hobiprojekt",
+  "version": "1.0.0",
+  "description": "This webpage is about pottery artist. This webpage has basic overview about works and information about her work. This webpages is built using HTML.\r #\r # Functionality Overview",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
