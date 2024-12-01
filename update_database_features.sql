@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Nov 14, 2024 kell 03:00 PL
--- Serveri versioon: 10.4.32-MariaDB
--- PHP versioon: 8.2.12
+-- Generation Time: Dec 02, 2024 at 04:01 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Andmebaas: `hobby_project`
+-- Database: `hobi_projekt`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `collections`
+-- Table structure for table `collections`
 --
 
 CREATE TABLE `collections` (
@@ -38,7 +38,7 @@ CREATE TABLE `collections` (
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `completed_pieces`
+-- Table structure for table `completed_pieces`
 --
 
 CREATE TABLE `completed_pieces` (
@@ -53,23 +53,24 @@ CREATE TABLE `completed_pieces` (
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `pieces`
+-- Table structure for table `pieces`
 --
 
 CREATE TABLE `pieces` (
   `id` int(10) UNSIGNED NOT NULL,
-  `collection_id` int(10) UNSIGNED NOT NULL,
+  `collection_id` int(10) UNSIGNED DEFAULT NULL,
   `name` varchar(191) NOT NULL,
   `piece_type` varchar(50) NOT NULL,
   `description` text DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` enum('available','sold','reserved') NOT NULL DEFAULT 'available'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `piece_tags`
+-- Table structure for table `piece_tags`
 --
 
 CREATE TABLE `piece_tags` (
@@ -82,7 +83,7 @@ CREATE TABLE `piece_tags` (
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `tags`
+-- Table structure for table `tags`
 --
 
 CREATE TABLE `tags` (
@@ -95,7 +96,7 @@ CREATE TABLE `tags` (
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -110,7 +111,7 @@ CREATE TABLE `users` (
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `user_collections`
+-- Table structure for table `user_collections`
 --
 
 CREATE TABLE `user_collections` (
@@ -121,115 +122,116 @@ CREATE TABLE `user_collections` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Indeksid tõmmistatud tabelitele
+-- Indexes for dumped tables
 --
 
 --
--- Indeksid tabelile `collections`
+-- Indexes for table `collections`
 --
 ALTER TABLE `collections`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksid tabelile `completed_pieces`
+-- Indexes for table `completed_pieces`
 --
 ALTER TABLE `completed_pieces`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `piece_id` (`piece_id`);
+  ADD UNIQUE KEY `piece_id` (`piece_id`) USING BTREE;
 
 --
--- Indeksid tabelile `pieces`
+-- Indexes for table `pieces`
 --
 ALTER TABLE `pieces`
   ADD PRIMARY KEY (`id`),
   ADD KEY `collection_id` (`collection_id`);
 
 --
--- Indeksid tabelile `piece_tags`
+-- Indexes for table `piece_tags`
 --
 ALTER TABLE `piece_tags`
   ADD PRIMARY KEY (`piece_id`,`tag_id`),
   ADD KEY `tag_id` (`tag_id`);
 
 --
--- Indeksid tabelile `tags`
+-- Indexes for table `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indeksid tabelile `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indeksid tabelile `user_collections`
+-- Indexes for table `user_collections`
 --
 ALTER TABLE `user_collections`
   ADD PRIMARY KEY (`user_id`,`collection_id`),
   ADD KEY `collection_id` (`collection_id`);
 
 --
--- AUTO_INCREMENT tõmmistatud tabelitele
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT tabelile `collections`
+-- AUTO_INCREMENT for table `collections`
 --
 ALTER TABLE `collections`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT tabelile `completed_pieces`
+-- AUTO_INCREMENT for table `completed_pieces`
 --
 ALTER TABLE `completed_pieces`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT tabelile `pieces`
+-- AUTO_INCREMENT for table `pieces`
 --
 ALTER TABLE `pieces`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT tabelile `tags`
+-- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT tabelile `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Tõmmistatud tabelite piirangud
+-- Constraints for dumped tables
 --
 
 --
--- Piirangud tabelile `completed_pieces`
+-- Constraints for table `completed_pieces`
 --
 ALTER TABLE `completed_pieces`
   ADD CONSTRAINT `completed_pieces_ibfk_1` FOREIGN KEY (`piece_id`) REFERENCES `pieces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Piirangud tabelile `pieces`
+-- Constraints for table `pieces`
 --
 ALTER TABLE `pieces`
   ADD CONSTRAINT `pieces_ibfk_1` FOREIGN KEY (`collection_id`) REFERENCES `collections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Piirangud tabelile `piece_tags`
+-- Constraints for table `piece_tags`
 --
 ALTER TABLE `piece_tags`
   ADD CONSTRAINT `piece_tags_ibfk_1` FOREIGN KEY (`piece_id`) REFERENCES `pieces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `piece_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Piirangud tabelile `user_collections`
+-- Constraints for table `user_collections`
 --
 ALTER TABLE `user_collections`
   ADD CONSTRAINT `user_collections_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
