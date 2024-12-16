@@ -38,19 +38,26 @@
             margin: 10px;
         }
 
+        /* Force each image to be 200x200, cropping as needed */
         .image-column img {
             width: 200px;
-            height: auto;
+            height: 200px;
+            object-fit: cover;
             margin: 10px;
         }
 
         .welcome-box {
-            margin: 20px;
+            width: 500px;
+            height: auto;
             padding: 20px;
-            border: 2px solid blue;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            text-align: left;
+            margin: 20px;
             display: inline-block;
-            font-size: 2em;
-            color: grey;
+            font-size: 16px;
+            color: #000;
+            line-height: 1.5;
         }
 
         .social-media {
@@ -72,39 +79,47 @@
     </style>
 </head>
 <body>
-    <div id="header"></div>
+<div id="header"></div>
 
-    <script>
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
+<script>
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+
+            // Highlight the "Home" link
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.textContent.trim() === 'Home') {
+                    link.classList.add('active');
+                }
             });
-    </script>
+        });
+</script>
 
-
-
-    <div class="image-container">
-        <div class="image-column">
-            <img src="images/pottery1.jpg" alt="Pottery 1">
-            <img src="images/pottery2.jpg" alt="Pottery 2">
-        </div>
-        <div>
-            <div class="welcome-box">Welcome bla-bla...</div>
-        </div>
-        <div class="image-column">
-            <img src="images/pottery3.jpg" alt="Pottery 3">
-            <img src="images/pottery4.jpg" alt="Pottery 4">
+<div class="image-container">
+    <div class="image-column">
+        <img src="images/pottery1.jpg" alt="Pottery 1">
+        <img src="images/pottery2.jpg" alt="Pottery 2">
+    </div>
+    <div>
+        <div class="welcome-box">
+            Welcome to LYZELL's POTTERY - where clay transforms into art! Discover our unique handcrafted ceramic pieces, learn about our artistic journey, and explore the beauty of traditional pottery techniques. Each piece tells a story of passion, creativity, and dedication to the timeless craft of ceramics.
         </div>
     </div>
-
-    <div class="social-media">
-        <a href="https://facebook.com/lyzellspottery" target="_blank">
-            <button>Facebook - Ly'Pottery</button>
-        </a>
-        <a href="https://instagram.com/lyzellspottery" target="_blank">
-            <button>Instagram - Ly'Pottery</button>
-        </a>
+    <div class="image-column">
+        <img src="images/pottery3.jpg" alt="Pottery 3">
+        <img src="images/pottery4.jpg" alt="Pottery 4">
     </div>
+</div>
+
+<div class="social-media">
+    <a href="https://facebook.com/lyzellspottery" target="_blank">
+        <button>Facebook - Ly'Pottery</button>
+    </a>
+    <a href="https://instagram.com/lyzellspottery" target="_blank">
+        <button>Instagram - Ly'Pottery</button>
+    </a>
+</div>
 </body>
 </html>

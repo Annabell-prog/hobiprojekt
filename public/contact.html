@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Contact - LYZELL's POTTERY</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 1rem 0 0.5rem;
+            font-size: 2rem;
+        }
+
+        /* Where our fetched header content goes */
+        #header {
+            margin-bottom: 1rem;
+        }
+
+        /* Basic nav styling (we also have it in header.html) */
+        .top-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            border: 2px solid #ccc;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+
+        .top-nav li {
+            flex: 1;
+        }
+
+        .top-nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Highlight the Contact link when on this page */
+        .top-nav a.active {
+            background-color: #ddd;
+        }
+
+        /* Layout for the contact page: placeholders on left & right, contact info center */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 80%;
+            margin: 0 auto 2rem;
+        }
+
+        .placeholder-images-left,
+        .placeholder-images-right {
+            width: 15%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .placeholder-images-left img,
+        .placeholder-images-right img {
+            width: 100%;
+            height: auto;
+            background-color: #eee;
+        }
+
+        .contact-info-center {
+            width: 70%;
+            text-align: left;
+            padding: 0 1rem;
+        }
+
+        .contact-info-center h2 {
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Some spacing for paragraphs & form elements */
+        .contact-info-center p {
+            margin: 0.5rem 0;
+        }
+
+        .map-container {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .map-embed {
+            width: 100%;
+            height: 250px;
+            border: 1px solid #ccc;
+        }
+
+        form {
+            margin: 1rem 0;
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border: 1px solid #ccc;
+        }
+
+        form label {
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            box-sizing: border-box;
+        }
+
+        form button {
+            margin-top: 1rem;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Simple media query for narrower screens */
+        @media(max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .placeholder-images-left,
+            .placeholder-images-right {
+                display: none; /* Hide placeholders on small screens if needed */
+            }
+            .contact-info-center {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- The header will be fetched into here -->
+<div id="header"></div>
+
+<!-- Fetch header.html and highlight "Contact" link -->
+<script>
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+
+            // Highlight the "Contact" link
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.textContent.trim() === 'Contact') {
+                    link.classList.add('active');
+                }
+            });
+        });
+</script>
+
+<div class="contact-container">
+
+    <!-- Placeholder images on the left -->
+    <div class="placeholder-images-left">
+        <img src="images/pottery5.jpg" alt="Placeholder 1">
+        <img src="images/pottery4.jpg" alt="Placeholder 2">
+    </div>
+
+    <!-- Main contact info in the center -->
+    <div class="contact-info-center">
+        <h2>Contact info</h2>
+
+        <p><strong>Business Name:</strong> LYZELL's POTTERY</p>
+        <p><strong>Registration number:</strong> 1234567-8</p>
+        <p><strong>Legal form:</strong> Sole Proprietorship</p>
+        <p><strong>Bank Account:</strong> 9876-543210</p>
+        <p><strong>Address:</strong> 111 Keraamika Tänav , Tallinn 10111 </p>
+
+        <div class="map-container">
+            <!-- Example embedded map (Google Maps iframe) -->
+            <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.085046292518!2d-122.4206798846792!3d37.77902687975864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809a13b7ab03%3A0x71e3dffb9d386541!2sCity%20Hall!5e0!3m2!1sen!2sus!4v1675274090743!5m2!1sen!2sus"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="map-embed">
+            </iframe>
+        </div>
+
+        <!-- Form for visitors to submit inquiries -->
+        <form id="contactForm" action="/contact" method="POST">
+            <label for="email">Email:</label>
+            <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Your email address"
+                    required
+            >
+
+            <label for="message">Message / Inquiry:</label>
+            <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    placeholder="Write your message here"
+                    required>
+            </textarea>
+
+            <button type="submit">Send</button>
+        </form>
+
+        <!-- Success message container (initially hidden) -->
+        <div id="successMessage" style="display: none; background-color: #d4edda; color: #155724; padding: 1rem; margin: 1rem 0; border: 1px solid #c3e6cb; border-radius: 4px;">
+            <strong>Thank you!</strong> Your message has been sent successfully. We will contact you soon.
+        </div>
+
+        <p><strong>Find us on social media:</strong></p>
+        <p>
+            <a href="https://facebook.com/YourPage" target="_blank">
+                <img src="images/facebook.png" alt="Facebook icon" style="width:24px; height:24px;">
+            </a>
+            <a href="https://instagram.com/YourProfile" target="_blank">
+                <img src="images/instagram.jpg" alt="Instagram icon" style="width:24px; height:24px;">
+            </a>
+        </p>
+
+        <p>For workshop info or selling pieces, please include details in the message above, or email us at <em>info@lyzpottery.com</em>.</p>
+
+    </div>
+
+    <!-- Placeholder images on the right -->
+    <div class="placeholder-images-right">
+        <img src="images/pottery6.jpg" alt="Placeholder 3">
+        <img src="images/pottery7.jpg" alt="Placeholder 4">
+    </div>
+
+</div>
+
+<!-- JavaScript for handling form submission -->
+<script>
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const submitButton = form.querySelector('button[type="submit"]');
+    const successMessage = document.getElementById('successMessage');
+
+    // Disable submit button and show loading state
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    try {
+        const response = await fetch('/contact', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+
+            // Show success message
+            successMessage.style.display = 'block';
+            successMessage.innerHTML = '<strong>Thank you!</strong> ' + result.message;
+
+            // Clear the form
+            form.reset();
+
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+
+        } else {
+            throw new Error('Server error');
+        }
+    } catch (error) {
+        // Show error message
+        alert('Error sending message. Please try again later.');
+        console.error('Error:', error);
+    } finally {
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send';
+    }
+});
+</script>
+
+</body>
+</html>

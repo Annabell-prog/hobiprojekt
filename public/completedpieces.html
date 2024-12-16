@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Completed Pieces</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 1rem 0 0.5rem;
+            font-size: 2rem;
+        }
+
+        /* Container for the fetched header */
+        #header {
+            margin-bottom: 1rem;
+        }
+
+        /* Basic styling for the top nav (defined in header.html, but we can style here) */
+        .top-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            border: 2px solid #ccc;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+
+        .top-nav li {
+            flex: 1;
+        }
+
+        .top-nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Highlight class for the active page */
+        .top-nav a.active {
+            background-color: #ddd;
+        }
+
+        /* A simple responsive grid for completed pottery items */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            width: 80%;
+            margin: 0 auto 2rem;
+        }
+
+        .gallery-item {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            text-align: left; /* left-align for clarity */
+        }
+
+        /* FRAME that holds each pottery image */
+        .image-frame {
+            width: 200px;           /* set a desired width */
+            height: 200px;          /* set a desired height */
+            border: 2px solid #ccc;
+            background-color: #eee; /* fallback background */
+            overflow: hidden;       /* hide any overflow if image is bigger */
+            display: flex;          /* center the image inside the frame */
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;  /* space under the frame */
+        }
+
+        /* Make the image fill the frame nicely */
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .description {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        /* The static "Description" text below each piece */
+        .static-description {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Completed Pottery Pieces</h1>
+
+<!-- Where our menu (header.html) will be injected -->
+<div id="header"></div>
+
+<!-- Script to fetch the shared header and highlight the "Completed pieces" link -->
+<script>
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            // Inject the header HTML
+            document.getElementById('header').innerHTML = data;
+
+            // Highlight the "Completed pieces" link
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.textContent.trim() === 'Completed pieces') {
+                    link.classList.add('active');
+                }
+            });
+        });
+</script>
+
+<div class="gallery">
+
+    <!-- 1 -->
+    <div class="gallery-item">
+        <div class="image-frame">
+            <img src="images/pottery7.jpg" alt="Evergreen Medium Handmade Ceramic Pottery Bowl">
+        </div>
+        <div class="description">Summer Collection – Evergreen Bowl</div>
+        <div class="static-description">Evergreen Medium Handmade Ceramic Pottery Bowl</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="gallery-item">
+        <div class="image-frame">
+            <img src="images/pottery2.jpg" alt="Handcrafted teacup with a floral interior and subtle angel-wing motif">
+        </div>
+        <div class="description">Summer Collection - Teacup</div>
+        <div class="static-description">Handcrafted teacup with a floral interior and subtle angel-wing motif</div>
+    </div>
+
+    <!-- 3 -->
+    <div class="gallery-item">
+        <div class="image-frame">
+            <img src="images/pottery3.jpg" alt="Raku-fired bowl with a distinctive black-and-white crackle pattern">
+        </div>
+        <div class="description">Summer Collection - Raku-fired Bowl</div>
+        <div class="static-description">Raku-fired bowl with a distinctive black-and-white crackle pattern</div>
+    </div>
+
+    <!-- 4 -->
+    <div class="gallery-item">
+        <div class="image-frame">
+            <img src="images/pottery4.jpg" alt="Ceramic Jug Vase and Cup">
+        </div>
+        <div class="description">Summer Collection - Complex  </div>
+        <div class="static-description">Ceramic jug Vase and Cup</div>
+    </div>
+
+    <!-- 5 -->
+    <div class="gallery-item">
+        <div class="image-frame">
+            <img src="images/pottery5.jpg" alt="The Copper Matte Raku Technique">
+        </div>
+        <div class="description">Summer Collection - Copper Matte Vase </div>
+        <div class="static-description">The Copper Matte Raku Technique</div>
+    </div>
+
+    <!-- 6 -->
+    <div class="gallery-item">
+        <div class="image-frame">
+            <img src="images/pottery6.jpg" alt="The Japanese Art of Fixing Broken Pieces of Pottery With Gold">
+        </div>
+        <div class="description">Summer Collection - Plate </div>
+        <div class="static-description">The Japanese Art of Fixing Broken Pieces of Pottery With Gold</div>
+    </div>
+
+</div>
+
+</body>
+</html>
