@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Completed Pieces</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 1rem 0 0.5rem;
+            font-size: 2rem;
+        }
+
+        /* Container for the fetched header */
+        #header {
+            margin-bottom: 1rem;
+        }
+
+        /* Basic styling for the top nav (defined in header.html, but we can style here) */
+        .top-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            border: 2px solid #ccc;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+
+        .top-nav li {
+            flex: 1;
+        }
+
+        .top-nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Highlight class for the active page */
+        .top-nav a.active {
+            background-color: #ddd;
+        }
+
+        /* A simple responsive grid for completed pottery items */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            width: 80%;
+            margin: 0 auto 2rem;
+        }
+
+        .gallery-item {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            text-align: left; /* left-align for clarity */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            background-color: #eee; /* placeholder background */
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .description {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        /* The static "Description" text below each piece */
+        .static-description {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Completed Pottery Pieces</h1>
+
+<!-- Where our menu (header.html) will be injected -->
+<div id="header"></div>
+
+<!-- Script to fetch the shared header and highlight the "Completed pieces" link -->
+<script>
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            // Inject the header HTML
+            document.getElementById('header').innerHTML = data;
+
+            // Highlight the "Completed pieces" link
+            const navLinks = document.querySelectorAll('.top-nav a');
+            navLinks.forEach(link => {
+                if (link.textContent.trim() === 'Completed pieces') {
+                    link.classList.add('active');
+                }
+            });
+        });
+</script>
+
+<div class="gallery">
+
+    <div class="gallery-item">
+        <img src="#" alt="Pottery placeholder">
+        <div class="description">Summer Collection – Clay Bowl</div>
+        <div class="static-description">Description</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="Pottery placeholder">
+        <div class="description">Flower Vase – Blue Glaze</div>
+        <div class="static-description">Description</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="Pottery placeholder">
+        <div class="description">Coffee Mug Set – Rustic Brown</div>
+        <div class="static-description">Description</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="Pottery placeholder">
+        <div class="description">Decorative Plate – Hand Painted</div>
+        <div class="static-description">Description</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="Pottery placeholder">
+        <div class="description">Serving Bowl – Earth Tones</div>
+        <div class="static-description">Description</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="#" alt="Pottery placeholder">
+        <div class="description">Fruit Bowl – Speckled Glaze</div>
+        <div class="static-description">Description</div>
+    </div>
+
+</div>
+
+</body>
+</html>
