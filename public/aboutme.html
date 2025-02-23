@@ -3,33 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LYZELL's POTTERY</title>
+    <title>LYZELL's POTTERY - About Me</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            margin-bottom: 1rem;
         }
 
         .content {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 50px 0;
+            margin: 50px auto;
+            max-width: 900px; /* optional width limit */
         }
 
-        .image-placeholder {
+        /* Frame/container for the images */
+        .image-frame {
             width: 150px;
             height: 150px;
-            background-color: #e0e0e0;
-            display: inline-block;
+            overflow: hidden; /* hide any overflow if image is too big */
+            border: 2px solid #ccc;
             margin: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee; /* fallback bg color */
         }
 
+        .image-frame img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover; /* ensures the image fills the frame nicely */
+        }
 
+        /* The about text container */
         .about-section {
             width: 300px;
-            height: 200px;
+            height: auto; /* let the content define the height */
             padding: 20px;
             border: 1px solid #ccc;
             background-color: #fff;
@@ -43,33 +61,38 @@
     </style>
 </head>
 <body>
-    <div id="header"></div>
+
+<!-- Where our menu will be fetched -->
+<div id="header"></div>
 
 <script>
     fetch('header.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('header').innerHTML = data;
-
-            // Highlight the "About me" link
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => {
-                if (link.textContent.trim() === 'About me') {
-                    link.classList.add('active');
-                }
-            });
         });
 </script>
 
-    <div class="content">
-        <div class="image-placeholder"></div>
-
-        <div class="about-section">
-            <h2>About me</h2>
-            <p>Welcome to LYZELL's POTTERY! Here you can find information about my passion for pottery and the beautiful works I create. Stay tuned for more updates!</p>
-        </div>
-
-        <div class="image-placeholder"></div>
+<div class="content">
+    <!-- Left image frame -->
+    <div class="image-frame">
+        <img src="images/pottery4.jpg" alt="Pottery/Artist on left">
     </div>
+
+    <!-- About text -->
+    <div class="about-section">
+        <h2>About Me</h2>
+        <p>
+            Welcome to LYZELL's POTTERY! Here you can find information about my passion
+            for pottery and the beautiful works I create. Stay tuned for more updates!
+        </p>
+    </div>
+
+    <!-- Right image frame -->
+    <div class="image-frame">
+        <img src="images/pottery1.jpg" alt="Pottery/Artist on right">
+    </div>
+</div>
+
 </body>
 </html>
