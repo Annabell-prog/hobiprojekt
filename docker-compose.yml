@@ -54,6 +54,18 @@ services:
     volumes:
       - redis_data:/data
 
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: test
+      MYSQL_PASSWORD: 123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
 
 volumes:
   mongodb-data:
@@ -61,3 +73,4 @@ volumes:
   mssql-data:
   mysql-data:
   redis_data:
+  mariadb-data:
