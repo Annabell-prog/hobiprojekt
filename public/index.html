@@ -38,9 +38,11 @@
             margin: 10px;
         }
 
+        /* Force each image to be 200x200, cropping as needed */
         .image-column img {
             width: 200px;
-            height: auto;
+            height: 200px;
+            object-fit: cover;
             margin: 10px;
         }
 
@@ -72,39 +74,37 @@
     </style>
 </head>
 <body>
-    <div id="header"></div>
+<div id="header"></div>
 
-    <script>
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            });
-    </script>
+<script>
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+        });
+</script>
 
-
-
-    <div class="image-container">
-        <div class="image-column">
-            <img src="images/pottery1.jpg" alt="Pottery 1">
-            <img src="images/pottery2.jpg" alt="Pottery 2">
-        </div>
-        <div>
-            <div class="welcome-box">Welcome bla-bla...</div>
-        </div>
-        <div class="image-column">
-            <img src="images/pottery3.jpg" alt="Pottery 3">
-            <img src="images/pottery4.jpg" alt="Pottery 4">
-        </div>
+<div class="image-container">
+    <div class="image-column">
+        <img src="images/pottery1.jpg" alt="Pottery 1">
+        <img src="images/pottery2.jpg" alt="Pottery 2">
     </div>
-
-    <div class="social-media">
-        <a href="https://facebook.com/lyzellspottery" target="_blank">
-            <button>Facebook - Ly'Pottery</button>
-        </a>
-        <a href="https://instagram.com/lyzellspottery" target="_blank">
-            <button>Instagram - Ly'Pottery</button>
-        </a>
+    <div>
+        <div class="welcome-box">Welcome bla-bla...</div>
     </div>
+    <div class="image-column">
+        <img src="images/pottery3.jpg" alt="Pottery 3">
+        <img src="images/pottery4.jpg" alt="Pottery 4">
+    </div>
+</div>
+
+<div class="social-media">
+    <a href="https://facebook.com/lyzellspottery" target="_blank">
+        <button>Facebook - Ly'Pottery</button>
+    </a>
+    <a href="https://instagram.com/lyzellspottery" target="_blank">
+        <button>Instagram - Ly'Pottery</button>
+    </a>
+</div>
 </body>
 </html>
