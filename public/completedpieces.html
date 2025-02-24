@@ -66,12 +66,24 @@
             text-align: left; /* left-align for clarity */
         }
 
-        .gallery-item img {
+        /* FRAME that holds each pottery image */
+        .image-frame {
+            width: 200px;           /* set a desired width */
+            height: 200px;          /* set a desired height */
+            border: 2px solid #ccc;
+            background-color: #eee; /* fallback background */
+            overflow: hidden;       /* hide any overflow if image is bigger */
+            display: flex;          /* center the image inside the frame */
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;  /* space under the frame */
+        }
+
+        /* Make the image fill the frame nicely */
+        .image-frame img {
             width: 100%;
-            height: auto;
-            background-color: #eee; /* placeholder background */
-            display: block;
-            margin-bottom: 0.5rem;
+            height: 100%;
+            object-fit: cover;
         }
 
         .description {
@@ -115,40 +127,58 @@
 
 <div class="gallery">
 
+    <!-- 1 -->
     <div class="gallery-item">
-        <img src="#" alt="Pottery placeholder">
-        <div class="description">Summer Collection – Clay Bowl</div>
-        <div class="static-description">Description</div>
+        <div class="image-frame">
+            <img src="images/pottery7.jpg" alt="Evergreen Medium Handmade Ceramic Pottery Bowl">
+        </div>
+        <div class="description">Summer Collection – Evergreen Bowl</div>
+        <div class="static-description">Evergreen Medium Handmade Ceramic Pottery Bowl</div>
     </div>
 
+    <!-- 2 -->
     <div class="gallery-item">
-        <img src="#" alt="Pottery placeholder">
-        <div class="description">Flower Vase – Blue Glaze</div>
-        <div class="static-description">Description</div>
+        <div class="image-frame">
+            <img src="images/pottery2.jpg" alt="Handcrafted teacup with a floral interior and subtle angel-wing motif">
+        </div>
+        <div class="description">Summer Collection - Teacup</div>
+        <div class="static-description">Handcrafted teacup with a floral interior and subtle angel-wing motif</div>
     </div>
 
+    <!-- 3 -->
     <div class="gallery-item">
-        <img src="#" alt="Pottery placeholder">
-        <div class="description">Coffee Mug Set – Rustic Brown</div>
-        <div class="static-description">Description</div>
+        <div class="image-frame">
+            <img src="images/pottery3.jpg" alt="Raku-fired bowl with a distinctive black-and-white crackle pattern">
+        </div>
+        <div class="description">Summer Collection - Raku-fired Bowl</div>
+        <div class="static-description">Raku-fired bowl with a distinctive black-and-white crackle pattern</div>
     </div>
 
+    <!-- 4 -->
     <div class="gallery-item">
-        <img src="#" alt="Pottery placeholder">
-        <div class="description">Decorative Plate – Hand Painted</div>
-        <div class="static-description">Description</div>
+        <div class="image-frame">
+            <img src="images/pottery4.jpg" alt="Ceramic Jug Vase and Cup">
+        </div>
+        <div class="description">Summer Collection - Complex  </div>
+        <div class="static-description">Ceramic jug Vase and Cup</div>
     </div>
 
+    <!-- 5 -->
     <div class="gallery-item">
-        <img src="#" alt="Pottery placeholder">
-        <div class="description">Serving Bowl – Earth Tones</div>
-        <div class="static-description">Description</div>
+        <div class="image-frame">
+            <img src="images/pottery5.jpg" alt="The Copper Matte Raku Technique">
+        </div>
+        <div class="description">Summer Collection - Copper Matte Vase </div>
+        <div class="static-description">The Copper Matte Raku Technique</div>
     </div>
 
+    <!-- 6 -->
     <div class="gallery-item">
-        <img src="#" alt="Pottery placeholder">
-        <div class="description">Fruit Bowl – Speckled Glaze</div>
-        <div class="static-description">Description</div>
+        <div class="image-frame">
+            <img src="images/pottery6.jpg" alt="The Japanese Art of Fixing Broken Pieces of Pottery With Gold">
+        </div>
+        <div class="description">Summer Collection - Plate </div>
+        <div class="static-description">The Japanese Art of Fixing Broken Pieces of Pottery With Gold</div>
     </div>
 
 </div>
