@@ -149,7 +149,6 @@
 </head>
 <body>
 
-
 <!-- The header will be fetched into here -->
 <div id="header"></div>
 
@@ -174,8 +173,8 @@
 
     <!-- Placeholder images on the left -->
     <div class="placeholder-images-left">
-        <img src="#" alt="Placeholder 1">
-        <img src="#" alt="Placeholder 2">
+        <img src="images/pottery5.jpg" alt="Placeholder 1">
+        <img src="images/pottery4.jpg" alt="Placeholder 2">
     </div>
 
     <!-- Main contact info in the center -->
@@ -200,7 +199,8 @@
         </div>
 
         <!-- Form for visitors to submit inquiries -->
-        <form>
+        <!-- CHANGED: we add action="/contact" method="POST" -->
+        <form action="/contact" method="POST"> <!-- CHANGED -->
             <label for="email">Email:</label>
             <input
                     type="email"
@@ -216,7 +216,7 @@
                     name="message"
                     rows="4"
                     placeholder="Write your message here">
-        </textarea>
+            </textarea>
 
             <button type="submit">Send</button>
         </form>
@@ -237,8 +237,8 @@
 
     <!-- Placeholder images on the right -->
     <div class="placeholder-images-right">
-        <img src="#" alt="Placeholder 3">
-        <img src="#" alt="Placeholder 4">
+        <img src="images/pottery6.jpg" alt="Placeholder 3">
+        <img src="images/pottery7.jpg" alt="Placeholder 4">
     </div>
 
 </div>
