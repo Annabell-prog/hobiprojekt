@@ -111,11 +111,7 @@ The application provides the following routes:
 │   ├── completedpieces.html # Completed works gallery
 │   ├── header.html        # Shared header component
 │   └── images/            # Pottery images and assets
-├── SQL/                   # Database dumps for different systems
-│   ├── mysql/
-│   ├── postgresql/
-│   ├── mongodb/
-│   └── mssql/
+
 ├── server.js              # Express.js server configuration
 ├── dump.sql              # Main MySQL database dump
 ├── docker-compose.yml    # Docker services configuration
