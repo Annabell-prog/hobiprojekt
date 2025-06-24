@@ -70,6 +70,14 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('header').innerHTML = data;
+
+            // Highlight the "About me" link
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                if (link.textContent.trim() === 'About me') {
+                    link.classList.add('active');
+                }
+            });
         });
 </script>
 
