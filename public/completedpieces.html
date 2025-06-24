@@ -116,7 +116,7 @@
             document.getElementById('header').innerHTML = data;
 
             // Highlight the "Completed pieces" link
-            const navLinks = document.querySelectorAll('.top-nav a');
+            const navLinks = document.querySelectorAll('nav a');
             navLinks.forEach(link => {
                 if (link.textContent.trim() === 'Completed pieces') {
                     link.classList.add('active');

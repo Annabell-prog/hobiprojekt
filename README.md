@@ -1,17 +1,35 @@
-# Lyzell's Pottery
+# LYZELL's POTTERY
 
-A beautiful pottery artist portfolio website showcasing ceramic artworks and collections. This web application provides visitors with an overview of the artist's works, detailed information about pottery pieces, and a way to explore different collections and completed works.
+This webpage showcases a pottery artist's work with a complete overview of her ceramic creations.
 
 ## Features
-
 - **Portfolio Gallery**: Browse through various pottery artworks and collections
 - **Artist Information**: Learn about the pottery artist and their craft
 - **Completed Pieces**: View finished pottery works with detailed information
 - **Contact Information**: Get in touch with the artist for inquiries
 - **Responsive Design**: Clean, modern interface optimized for all devices
 
-## Technical Stack
+## Setup
+1. Start database: `docker-compose up -d`
+2. Start application: `npm start`
+3. Access: http://localhost:3000
 
+## Project Structure
+```
+├── public/                 # Static frontend files
+│   ├── index.html         # Main homepage
+│   ├── aboutme.html       # About Me page
+│   ├── contact.html       # Contact page with form
+│   ├── completedpieces.html # Completed works gallery
+│   ├── header.html        # Shared header component
+│   └── images/            # Pottery images and assets
+├── server.js              # Express.js server configuration
+├── docker-compose.yml     # Docker services configuration
+├── package.json           # Node.js dependencies and scripts
+└── README.md              # Project documentation
+```
+
+## Technical Stack
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Backend**: Node.js with Express.js framework
 - **Database**: MySQL/MariaDB with comprehensive pottery management schema
@@ -41,11 +59,11 @@ Before running this application, ensure you have the following installed:
 
 2. Create and initialize the database using the provided SQL dump:
    ```bash
-   mysql -u root -p hobby_project < dump.sql
+   mysql -u root -p mydb < dump.sql
    ```
 
    This command will:
-   - Create the `hobby_project` database
+   - Create the `mydb` database
    - Set up all necessary tables (collections, pieces, completed_pieces, tags, users, etc.)
    - Configure proper relationships and constraints between tables
 
@@ -60,7 +78,7 @@ For a quick setup with Docker, you can use the provided docker-compose configura
 
 2. Wait for the container to be ready, then initialize the database:
    ```bash
-   mysql -h 127.0.0.1 -P 3306 -u root -p123 hobby_project < dump.sql
+   mysql -h 127.0.0.1 -P 3308 -u root -p123 mydb < dump.sql
    ```
 
 ### Database Schema Overview
@@ -101,23 +119,6 @@ The application provides the following routes:
 - `/contact` - Contact form and information
 - `/completedpieces` - Gallery of completed pottery works
 
-## Project Structure
-
-```
-├── public/                 # Static frontend files
-│   ├── index.html         # Main homepage
-│   ├── aboutme.html       # Artist information page
-│   ├── contact.html       # Contact page
-│   ├── completedpieces.html # Completed works gallery
-│   ├── header.html        # Shared header component
-│   └── images/            # Pottery images and assets
-
-├── server.js              # Express.js server configuration
-├── dump.sql              # Main MySQL database dump
-├── docker-compose.yml    # Docker services configuration
-└── package.json          # Node.js dependencies and scripts
-```
-
 ## Development
 
 ### Adding New Pottery Pieces
@@ -137,16 +138,6 @@ The frontend files are located in the `public/` directory:
 - Update CSS styles for visual customization
 - Add new images to the `public/images/` directory
 
-## Database Support
-
-While the application is primarily designed for MySQL/MariaDB, the project includes database dumps for multiple systems:
-
-- **MySQL/MariaDB** (primary)
-- **PostgreSQL**
-- **MongoDB**
-- **Microsoft SQL Server**
-- **Redis**
-
 ## Troubleshooting
 
 ### Common Issues
@@ -160,7 +151,7 @@ While the application is primarily designed for MySQL/MariaDB, the project inclu
 If you encounter database connection issues, verify:
 - MySQL/MariaDB service is running
 - Database credentials are correct
-- The `hobby_project` database exists
+- The `mydb` database exists
 - All tables have been created from the dump file
 
 ## License

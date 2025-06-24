@@ -5,6 +5,10 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+// Middleware to parse form data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
@@ -23,6 +27,23 @@ app.get('/contact', (req, res) => {
 
 app.get('/completedpieces', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'completedpieces.html'));
+});
+
+// Handle contact form submission
+app.post('/contact', (req, res) => {
+    const { email, message } = req.body;
+
+    // Log the received data
+    console.log('Contact form submission received:');
+    console.log('Email:', email);
+    console.log('Message:', message);
+    console.log('Timestamp:', new Date().toISOString());
+
+    // Send a JSON response indicating success
+    res.json({
+        success: true,
+        message: 'Thank you! Your message has been sent successfully! We will contact you soon.'
+    });
 });
 
 // Start the server
