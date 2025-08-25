@@ -1,2 +1,39 @@
 /.idea/
 /node_modules/
+
+# Logifailid ja tundlik info
+/logs/
+*.log
+
+# Andmebaasi failid
+*.sql
+dump.sql
+
+# Keskkonna muutujad
+.env
+.env.local
+.env.production
+
+# Konfiguratsioonifailid tundliku infoga
+config/database.js
+config/secrets.js
+
+# Privaatvõtmed ja sertifikaadid
+*.pem
+*.key
+*.crt
+
+# Temporary failid
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDE/Editor failid
+.vscode/settings.json
+*.swp
+*.swo
+
+# Backup failid
+*.bak
+*.backup

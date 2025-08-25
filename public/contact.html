@@ -173,8 +173,8 @@
 
     <!-- Placeholder images on the left -->
     <div class="placeholder-images-left">
-        <img src="images/pottery5.jpg" alt="Placeholder 1">
-        <img src="images/pottery4.jpg" alt="Placeholder 2">
+        <img src="images/pottery4.jpg" alt="Placeholder 1">
+        <img src="images/pottery3.jpg" alt="Placeholder 2">
     </div>
 
     <!-- Main contact info in the center -->
@@ -199,8 +199,8 @@
         </div>
 
         <!-- Form for visitors to submit inquiries -->
-        <!-- CHANGED: we add action="/contact" method="POST" -->
-        <form action="/contact" method="POST"> <!-- CHANGED -->
+        <!-- JavaScript-based contact form for frontend-only project -->
+        <form id="contactForm">
             <label for="email">Email:</label>
             <input
                     type="email"
@@ -215,11 +215,14 @@
                     id="message"
                     name="message"
                     rows="4"
-                    placeholder="Write your message here">
+                    placeholder="Write your message here"
+                    required>
             </textarea>
 
             <button type="submit">Send</button>
         </form>
+
+        <div id="responseMessage" style="display: none; margin-top: 20px; padding: 10px; border-radius: 5px;"></div>
 
         <p><strong>Find us on social media:</strong></p>
         <p>
@@ -237,11 +240,145 @@
 
     <!-- Placeholder images on the right -->
     <div class="placeholder-images-right">
-        <img src="images/pottery6.jpg" alt="Placeholder 3">
-        <img src="images/pottery7.jpg" alt="Placeholder 4">
+        <img src="images/pottery5.jpg" alt="Placeholder 3">
+        <img src="images/pottery6.jpg" alt="Placeholder 4">
     </div>
 
 </div>
+
+<script>
+// E-maili valideerimise funktsioon
+function validateEmail(email) {
+    // Tugev e-maili regex pattern
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+    // Põhilised kontrollid
+    if (!email || email.trim() === '') {
+        return { valid: false, message: 'Email is required!' };
+    }
+    
+    if (email.length > 100) {
+        return { valid: false, message: 'Email is too long (max 100 characters)!' };
+    }
+    
+    if (!emailPattern.test(email)) {
+        return { valid: false, message: 'Please enter a valid email address!' };
+    }
+    
+    // Keelatud märgid ja mustrid
+    const forbiddenPatterns = [
+        /<script/i,
+        /javascript:/i,
+        /onclick/i,
+        /onerror/i,
+        /[<>]/,
+        /['"]/
+    ];
+    
+    for (let pattern of forbiddenPatterns) {
+        if (pattern.test(email)) {
+            return { valid: false, message: 'Email contains forbidden characters!' };
+        }
+    }
+    
+    return { valid: true, message: 'OK' };
+}
+
+// Sõnumi valideerimise funktsioon
+function validateMessage(message) {
+    if (!message || message.trim() === '') {
+        return { valid: false, message: 'Message is required!' };
+    }
+    
+    if (message.length > 1000) {
+        return { valid: false, message: 'Message is too long (max 1000 characters)!' };
+    }
+    
+    return { valid: true, message: 'OK' };
+}
+
+// Vorm submit handler
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const responseDiv = document.getElementById('responseMessage');
+    
+    // Valideeri e-mail
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.valid) {
+        responseDiv.style.display = 'block';
+        responseDiv.textContent = emailValidation.message;
+        responseDiv.style.backgroundColor = '#f8d7da';
+        responseDiv.style.color = '#721c24';
+        return;
+    }
+    
+    // Valideeri sõnum
+    const messageValidation = validateMessage(message);
+    if (!messageValidation.valid) {
+        responseDiv.style.display = 'block';
+        responseDiv.textContent = messageValidation.message;
+        responseDiv.style.backgroundColor = '#f8d7da';
+        responseDiv.style.color = '#721c24';
+        return;
+    }
+    
+    // Kui kõik on OK, saada serverisse
+    fetch('/contact', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, message })
+    })
+    .then(response => response.json())
+    .then(data => {
+        responseDiv.style.display = 'block';
+        responseDiv.textContent = data.message;
+        responseDiv.style.backgroundColor = data.success ? '#d4edda' : '#f8d7da';
+        responseDiv.style.color = data.success ? '#155724' : '#721c24';
+        if (data.success) {
+            document.getElementById('contactForm').reset();
+        }
+    })
+    .catch(() => {
+        responseDiv.style.display = 'block';
+        responseDiv.textContent = 'Error! Failed to send message.';
+        responseDiv.style.backgroundColor = '#f8d7da';
+        responseDiv.style.color = '#721c24';
+    });
+});
+
+// Reaalajas e-maili valideerimise tagasiside
+document.getElementById('email').addEventListener('blur', function() {
+    const email = this.value.trim();
+    const validation = validateEmail(email);
+    
+    if (email && !validation.valid) {
+        this.style.borderColor = '#dc3545';
+        this.style.backgroundColor = '#f8d7da';
+    } else {
+        this.style.borderColor = '#28a745';
+        this.style.backgroundColor = '#d4edda';
+    }
+});
+
+// Reaalajas sõnumi valideerimise tagasiside
+document.getElementById('message').addEventListener('blur', function() {
+    const message = this.value.trim();
+    const validation = validateMessage(message);
+    
+    if (message && !validation.valid) {
+        this.style.borderColor = '#dc3545';
+        this.style.backgroundColor = '#f8d7da';
+    } else {
+        this.style.borderColor = '#28a745';
+        this.style.backgroundColor = '#d4edda';
+    }
+});
+</script>
 
 </body>
 </html>

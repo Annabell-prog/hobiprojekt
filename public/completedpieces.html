@@ -125,63 +125,64 @@
         });
 </script>
 
-<div class="gallery">
-
-    <!-- 1 -->
-    <div class="gallery-item">
-        <div class="image-frame">
-            <img src="images/pottery7.jpg" alt="Evergreen Medium Handmade Ceramic Pottery Bowl">
-        </div>
-        <div class="description">Summer Collection – Evergreen Bowl</div>
-        <div class="static-description">Evergreen Medium Handmade Ceramic Pottery Bowl</div>
-    </div>
-
-    <!-- 2 -->
-    <div class="gallery-item">
-        <div class="image-frame">
-            <img src="images/pottery2.jpg" alt="Handcrafted teacup with a floral interior and subtle angel-wing motif">
-        </div>
-        <div class="description">Summer Collection - Teacup</div>
-        <div class="static-description">Handcrafted teacup with a floral interior and subtle angel-wing motif</div>
-    </div>
-
-    <!-- 3 -->
-    <div class="gallery-item">
-        <div class="image-frame">
-            <img src="images/pottery3.jpg" alt="Raku-fired bowl with a distinctive black-and-white crackle pattern">
-        </div>
-        <div class="description">Summer Collection - Raku-fired Bowl</div>
-        <div class="static-description">Raku-fired bowl with a distinctive black-and-white crackle pattern</div>
-    </div>
-
-    <!-- 4 -->
-    <div class="gallery-item">
-        <div class="image-frame">
-            <img src="images/pottery4.jpg" alt="Ceramic Jug Vase and Cup">
-        </div>
-        <div class="description">Summer Collection - Complex  </div>
-        <div class="static-description">Ceramic jug Vase and Cup</div>
-    </div>
-
-    <!-- 5 -->
-    <div class="gallery-item">
-        <div class="image-frame">
-            <img src="images/pottery5.jpg" alt="The Copper Matte Raku Technique">
-        </div>
-        <div class="description">Summer Collection - Copper Matte Vase </div>
-        <div class="static-description">The Copper Matte Raku Technique</div>
-    </div>
-
-    <!-- 6 -->
-    <div class="gallery-item">
-        <div class="image-frame">
-            <img src="images/pottery6.jpg" alt="The Japanese Art of Fixing Broken Pieces of Pottery With Gold">
-        </div>
-        <div class="description">Summer Collection - Plate </div>
-        <div class="static-description">The Japanese Art of Fixing Broken Pieces of Pottery With Gold</div>
-    </div>
-
+<div class="gallery" id="gallery">
+    <!-- Galerii täidetakse JavaScript abil andmebaasist -->
 </div>
+
+<script>
+// Laadime galerii andmed andmebaasist
+fetch('/api/pieces-with-collections')
+    .then(response => response.json())
+    .then(data => {
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = '';
+        
+        data.forEach((piece, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            
+            // Kasutame olemasolevaid pilte või vaike placeholder
+            const imageIndex = (index % 7) + 1; // pottery1.jpg kuni pottery7.jpg
+            const imageSrc = `images/pottery${imageIndex}.jpg`;
+            
+            galleryItem.innerHTML = `
+                <div class="image-frame">
+                    <img src="${imageSrc}" alt="${piece.description || piece.name}">
+                </div>
+                <div class="description">${piece.collection_name} - ${piece.name}</div>
+                <div class="static-description">${piece.description || 'Handmade ceramic piece'}</div>
+            `;
+            
+            gallery.appendChild(galleryItem);
+        });
+        
+        // Kui andmebaasis pole piisavalt andmeid, näita vaikimisi sisu
+        if (data.length === 0) {
+            gallery.innerHTML = `
+                <div class="gallery-item">
+                    <div class="image-frame">
+                        <img src="images/pottery1.jpg" alt="Pottery piece">
+                    </div>
+                    <div class="description">Sample Collection - Sample Piece</div>
+                    <div class="static-description">Beautiful handmade ceramic piece</div>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Viga galerii andmete laadimisel:', error);
+        // Kui API ei tööta, kuva vaikimisi sisu
+        document.getElementById('gallery').innerHTML = `
+            <div class="gallery-item">
+                <div class="image-frame">
+                    <img src="images/pottery1.jpg" alt="Pottery piece">
+                </div>
+                <div class="description">Sample Collection - Sample Piece</div>
+                <div class="static-description">Beautiful handmade ceramic piece</div>
+            </div>
+        `;
+    });
+</script>
 
 </body>
 </html>

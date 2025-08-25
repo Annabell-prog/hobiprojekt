@@ -1,0 +1,20 @@
+TESTJUHTUMITE TABEL - LYZELL'S POTTERY							
+Test ID,Testi tüüp,Testimise objekt,Sisend,Sammud,Oodatav tulemus,Käsitsi/Auto,Prioriteet
+TC001,Smoke,Avalehe laadimine,URL: localhost:3000,"1. Ava brauser<br>2. Mine localhost:3000",Avaleht laadib 3 sek jooksul pildid nähtavad,Käsitsi,P1
+TC002,Smoke,Galerii laadimine,Klick galerii lehele,"1. Ava avaleht<br>2. Kliki galerii lingile",Galerii leht avaneb keraamikatööd nähtavad,Käsitsi,P1
+TC003,Integration,Kontaktivormi töötamine,"Email: test@test.ee<br>Message: ""Tere soovin osta""","1. Mine contact lehele<br>2. Täida vorm<br>3. Kliki Send",Roheline success teade kuvatakse,Käsitsi,P1
+TC004,Integration,Andmebaasi salvestamine,Eelmine vormi test,"1. Täida kontaktivorm<br>2. Kontrolli andmebaasi",Inquiry salvestatakse inquiries tabelisse,Käsitsi,P1
+TC005,System,Navigatsiooni süsteem,Klõpsud menüü linkidel,"1. Ava avaleht<br>2. Kliki kõik menüü lingid läbi<br>3. Tagasi avalehele",Kõik lehed avanevad tagasinavigeerimine töötab,Käsitsi,P1
+TC006,System,Täielik kasutaja teekond,Uus külastaja stsenaarium,"1. Ava avaleht<br>2. Vaata galeriid<br>3. Loe about infot<br>4. Saada kontaktisõnum",Kogu protsess toimib sujuvalt info on kättesaadav,Käsitsi,P2
+TC007,UAT,Kunstniku info leidmine,Kasutaja otsib kunstniku taustainfot,"1. Ava veebileht<br>2. Otsi about informatsiooni<br>3. Hinda info piisavust",About leht sisaldab piisavalt infot kunstniku kohta,Käsitsi,P2
+TC008,UAT,Kontakteerimise lihtsus,Klient tahab tellimust teha,"1. Külasta veebilehte<br>2. Leia kontaktandmed<br>3. Saada päring",Kontaktandmed leitavad alla 30 sek vorm on lihtne,Käsitsi,P2
+TC009,Regression,Chrome brauseri töö,Kõik funktsioonid Chrome'is,"1. Ava Chrome<br>2. Testi kõik funktsioonid",Kõik töötab Chrome brauseris,Käsitsi,P2
+TC010,Regression,Firefox brauseri töö,Kõik funktsioonid Firefoxis,"1. Ava Firefox<br>2. Testi kõik funktsioonid",Kõik töötab Firefox brauseris,Käsitsi,P3
+TC011,Performance,Avalehe laadimiskiirus,Avalehe avamine,"1. Ava DevTools Network<br>2. Lae avaleht uuesti<br>3. Mõõda aega",Leht laadib alla 3 sekundi,Käsitsi,P2
+TC012,Performance,Piltide laadimise kiirus,Galerii piltide laadimine,"1. Mine galerii lehele<br>2. Jälgi piltide laadimist<br>3. Mõõda aega",Pildid laadivad alla 5 sekundi,Käsitsi,P3
+TC013,Usability,Mobiilvaate kasutamine,Telefoni simulatsioon,"1. Ava DevTools<br>2. Lülita mobile view<br>3. Testi navigeerimist",Veebileht on hästi kasutatav mobiiilis,Käsitsi,P2
+TC014,Usability,Kontaktivormi kasutamismugavus,Vormi täitmise protsess,"1. Mine contact lehele<br>2. Täida vorm<br>3. Hinda kasutajaliidest",Vorm on intuitiivne ja lihtne kasutada,Käsitsi,P2
+TC015,Security,Vormi validatsiooni kontroll,Tühi email väli,"1. Mine contact lehele<br>2. Jäta email tühjaks<br>3. Proovi saata",Kuvatakse veateade või form ei saada,Käsitsi,P2
+TC016,Security,SQL injection katse,"Email: ""'; DROP TABLE--""","1. Sisesta ohtlik kood email väljale<br>2. Saada vorm<br>3. Kontrolli andmebaasi",Andmebaas jääb terveks ohtlik sisend blokeeritud,Käsitsi,P1
+TC017,Functional,Vormi täielik valideerimine,"Email: invalid-email<br>Message: tühi","1. Sisesta vigane email<br>2. Jäta message tühjaks<br>3. Vajuta Send",Mõlemad väljad näitavad veateadet,Käsitsi,P2
+TC018,Functional,Galerii andmete kuvamine,Andmebaas sisaldab kollektsioone,"1. Kontrolli DB collections tabelit<br>2. Ava galerii leht<br>3. Võrdle andmeid",Galerii kuvab täpselt DB andmeid,Käsitsi,P1
